@@ -5,15 +5,33 @@
 <meta charset="UTF-8">
 <title>Patnos Dama V5.4</title>
 <style>
-body { background: #000; color: #fff; text-align: center; font-family: sans-serif; margin: 0; padding-top: 50px; }
-.board { display: block; width: 360px; height: 360px; border: 10px solid #222; margin: 0 auto; background: #111; line-height: 0; }
-.sq { display: inline-block; width: 45px; height: 45px; margin: 0; padding: 0; cursor: pointer; position: relative; }
-.sq-l { background: #333; }
-.sq-d { background: #1a1a1a; }
-.p { width: 34px; height: 34px; border-radius: 50%; position: absolute; top: 5px; left: 5px; }
-.p-g { background: #ffd700; box-shadow: 0 4px #8b6508; }
-.p-b { background: #3b82f6; box-shadow: 0 4px #1e3a8a; }
-.sel { border: 3px solid white; box-sizing: border-box; }
+body { background-color: #000; color: #fff; font-family: sans-serif; text-align: center; margin: 0; padding-top: 20px; }
+.board {
+width: 320px; height: 320px;
+border: 8px solid #333;
+margin: 20px auto;
+background-color: #111;
+display: block;
+font-size: 0;
+}
+.sq {
+display: inline-block;
+width: 40px; height: 40px;
+margin: 0; padding: 0;
+vertical-align: top;
+cursor: pointer;
+}
+.sq-l { background-color: #444; }
+.sq-d { background-color: #222; }
+.p {
+width: 30px; height: 30px;
+border-radius: 50%;
+margin: 5px;
+box-sizing: border-box;
+}
+.p-g { background-color: gold; border: 2px solid #8b6508; }
+.p-b { background-color: #3b82f6; border: 2px solid #1e3a8a; }
+.sel { border: 3px solid white !important; }
 </style>
 </head>
 <body>
