@@ -7,82 +7,81 @@
 <title>Patnos Dama V5.4</title>
 <script src=""></script>
 <style>
-body { background: #050505; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 10px; min-height: 100vh; margin: 0; }
-.board-container { background: #1a1a1a; padding: 12px; border-radius: 1.5rem; border: 4px solid #27272a; width: 95%; max-width: 450px; box-shadow: 0 0 50px rgba(0,0,0,0.9); margin-top: 10px; }
-#board { display: grid; grid-template-columns: repeat(8, 1fr); aspect-ratio: 1/1; border: 2px solid #000; background: #000; }
-.sq { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-.sq-l { background: #333; } .sq-d { background: #1a1a1a; }
-.p { width: 80%; height: 80%; border-radius: 50%; transition: 0.2s; position: relative; border: 1px solid rgba(255,255,255,0.1); }
-.p-g { background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b); box-shadow: 0 4px 0 #8b6508; border: 2px solid #daa520; }
-.p-b { background: radial-gradient(circle at 30% 30%, #3b82f6, #1e3a8a); box-shadow: 0 4px 0 #172554; border: 2px solid #2563eb; }
-.sel { transform: scale(1.15) translateY(-5px); outline: 4px solid #3b82f6; z-index: 50; box-shadow: 0 10px 20px rgba(59,130,246,0.5); }
-.panel { background: #111; border: 1px solid #333; border-radius: 1.5rem; padding: 15px; width: 95%; max-width: 450px; margin-top: 15px; }
+body { background: #050505; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 10px; margin: 0; }
+.board-container { background: #1a1a1a; padding: 10px; border-radius: 1.5rem; border: 4px solid #27272a; width: 90vw; max-width: 400px; box-shadow: 0 0 40px #000; margin-top: 10px; }
+#board { display: grid; grid-template-columns: repeat(8, 1fr); aspect-ratio: 1/1; background: #000; }
+.sq { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 0.1px solid #222; }
+.sq-l { background: #333; } .sq-d { background: #111; }
+.p { width: 80%; height: 80%; border-radius: 50%; transition: 0.2s; border: 2px solid rgba(255,255,255,0.1); }
+.p-g { background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b); box-shadow: 0 4px 0 #8b6508; border-color: #daa520; }
+.p-b { background: radial-gradient(circle at 30% 30%, #3b82f6, #1e3a8a); box-shadow: 0 4px 0 #172554; border-color: #2563eb; }
+.sel { transform: scale(1.1); outline: 3px solid #3b82f6; z-index: 10; box-shadow: 0 0 15px #3b82f6; }
+.panel { background: #111; border: 1px solid #333; border-radius: 1.2rem; padding: 15px; width: 90vw; max-width: 400px; margin-top: 15px; }
 </style>
 </head>
 <body>
-<div style="text-align: center; margin-top: 10px;">
-<p style="font-size: 8px; color: #555; letter-spacing: 3px; font-weight: bold; margin: 0;">İZMİR PATNOSLULAR DERNEĞİ YAPIMIDIR</p>
-<h1 style="color: #3b82f6; font-size: 24px; font-weight: 900; font-style: italic; margin: 5px 0;">PATNOS DAMA <span style="color: #444; font-size: 12px;">V5.4</span></h1>
+
+<div style="text-align: center; margin-top: 5px;">
+<p style="font-size: 8px; color: #555; letter-spacing: 2px; font-weight: bold; margin-bottom: 5px;">İZMİR PATNOSLULAR DERNEĞİ</p>
+<h1 style="color: #3b82f6; font-size: 22px; font-weight: 900; font-style: italic; margin: 0;">PATNOS DAMA <span style="color: #444; font-size: 10px;">V5.4</span></h1>
 </div>
 
 <div class="board-container"><div id="board"></div></div>
 
 <div class="panel">
-<div style="display: flex; justify-content: space-between; font-size: 10px; color: #555; margin-bottom: 10px;"><span>HAMLE SIRASI</span><span style="color: #3b82f6;">● 1:41</span></div>
-<div style="background: #1a1a1a; padding: 12px; border-radius: 12px; border-left: 5px solid #3b82f6; display: flex; align-items: center; gap: 15px;">
-<div style="width: 40px; height: 40px; background: #3b82f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px;">👤</div>
+<div style="display: flex; justify-content: space-between; font-size: 9px; color: #555; margin-bottom: 8px;"><span>SIRADAKİ HAMLE</span><span style="color: #3b82f6;">● 1:41</span></div>
+<div style="background: #1a1a1a; padding: 10px; border-radius: 10px; border-left: 4px solid #3b82f6; display: flex; align-items: center; gap: 12px;">
+<div style="width: 35px; height: 35px; background: #3b82f6; border-radius: 8px; display: flex; align-items: center; justify-content: center;">👤</div>
 <div>
-<div id="turn-txt" style="font-weight: 900; font-size: 18px; color: #fff;">ALTIN</div>
-<p style="font-size: 8px; color: #666; font-weight: bold; margin: 0;">KURAL: SADECE İLERİ VE YANLARA!</p>
+<div id="turn-txt" style="font-weight: 900; font-size: 16px; color: #fff;">ALTIN</div>
+<p style="font-size: 8px; color: #666; font-weight: bold; margin: 0;">KURAL: TAŞ YEME ZORUNLUDUR!</p>
 </div>
 </div>
-<div style="margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
-<button style="background: #222; font-size: 9px; padding: 8px; border-radius: 6px; color: #555;">ACEMİ</button>
-<button style="background: #fff; color: #000; font-size: 9px; padding: 8px; border-radius: 6px; font-weight: 900;">NORMAL</button>
-<button style="background: #222; font-size: 9px; padding: 8px; border-radius: 6px; color: #555;">UZMAN</button>
+<div style="margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px;">
+<button style="background: #222; font-size: 8px; padding: 6px; border-radius: 5px; color: #555;">ACEMİ</button>
+<button style="background: #fff; color: #000; font-size: 8px; padding: 6px; border-radius: 5px; font-weight: 900;">NORMAL</button>
+<button style="background: #222; font-size: 8px; padding: 6px; border-radius: 5px; color: #555;">UZMAN</button>
 </div>
 </div>
 
 <script>
-const bEl = document.getElementById('board');
-let board = Array(8).fill(null).map(() => Array(8).fill(null));
-let turn = 'gold'; let sel = null;
+const b = document.getElementById('board');
+let grid = Array(8).fill(null).map(() => Array(8).fill(null));
+let turn = 'G'; let s = null;
 
-function init() {
-for(let r=1; r<3; r++) for(let c=0; c<8; c++) board[r][c] = 'blue';
-for(let r=5; r<7; r++) for(let c=0; c<8; c++) board[r][c] = 'gold';
-render();
+function start() {
+for(let r=1; r<3; r++) for(let c=0; c<8; c++) grid[r][c] = 'B';
+for(let r=5; r<7; r++) for(let c=0; c<8; c++) grid[r][c] = 'G';
+show();
 }
 
-function render() {
-bEl.innerHTML = '';
+function show() {
+b.innerHTML = '';
 for(let r=0; r<8; r++) {
 for(let c=0; c<8; c++) {
-const sq = document.createElement('div');
-sq.className = sq ${(r+c)%2==0?&#39;sq-l&#39;:&#39;sq-d&#39;};
-if(board[r][c]) {
+const div = document.createElement('div');
+div.className = sq ${(r+c)%2==0?&#39;sq-l&#39;:&#39;sq-d&#39;};
+if(grid[r][c]) {
 const p = document.createElement('div');
-p.className = p ${board[r][c]==&#39;gold&#39;?&#39;p-g&#39;:&#39;p-b&#39;} ${sel?.r==r &amp;&amp; sel?.c==c?&#39;sel&#39;:&#39;&#39;};
-sq.appendChild(p);
+p.className = p ${grid[r][c]==&#39;G&#39;?&#39;p-g&#39;:&#39;p-b&#39;} ${s?.r==r &amp;&amp; s?.c==c?&#39;sel&#39;:&#39;&#39;};
+div.appendChild(p);
 }
-sq.onclick = () => {
-if(board[r][c] === turn) { sel = {r,c}; render(); }
-else if(sel && !board[r][c]) {
-if(Math.abs(r-sel.r) + Math.abs(c-sel.c) === 1) {
-board[r][c] = board[sel.r][sel.c];
-board[sel.r][sel.c] = null;
-turn = (turn === 'gold' ? 'blue' : 'gold');
-sel = null;
-document.getElementById('turn-txt').innerText = turn === 'gold' ? 'ALTIN' : 'MAVİ';
-render();
+div.onclick = () => {
+if(grid[r][c] === turn) { s = {r,c}; show(); }
+else if(s && !grid[r][c]) {
+if(Math.abs(r-s.r) + Math.abs(c-s.c) === 1) {
+grid[r][c] = grid[s.r][s.c]; grid[s.r][s.c] = null;
+turn = (turn === 'G' ? 'B' : 'G'); s = null;
+document.getElementById('turn-txt').innerText = turn === 'G' ? 'ALTIN' : 'MAVİ';
+show();
 }
 }
 };
-bEl.appendChild(sq);
+b.appendChild(div);
 }
 }
 }
-init();
+start();
 </script>
 
 </body>
