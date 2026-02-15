@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 
-<html lang="tr">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Patnos Dama V5.4</title>
 <style>
-body { background: #050505; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
-.board { display: grid; grid-template-columns: repeat(8, 45px); width: 360px; height: 360px; border: 10px solid #222; background: #111; }
-.sq { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-.sq-l { background: #333; } .sq-d { background: #1a1a1a; }
-.p { width: 34px; height: 34px; border-radius: 50%; pointer-events: none; }
-.p-g { background: gold; box-shadow: 0 4px #8b6508; }
+body { background: #000; color: #fff; text-align: center; font-family: sans-serif; margin: 0; padding-top: 50px; }
+.board { display: block; width: 360px; height: 360px; border: 10px solid #222; margin: 0 auto; background: #111; line-height: 0; }
+.sq { display: inline-block; width: 45px; height: 45px; margin: 0; padding: 0; cursor: pointer; position: relative; }
+.sq-l { background: #333; }
+.sq-d { background: #1a1a1a; }
+.p { width: 34px; height: 34px; border-radius: 50%; position: absolute; top: 5px; left: 5px; }
+.p-g { background: #ffd700; box-shadow: 0 4px #8b6508; }
 .p-b { background: #3b82f6; box-shadow: 0 4px #1e3a8a; }
-.sel { outline: 3px solid white; box-shadow: 0 0 15px white; }
+.sel { border: 3px solid white; box-sizing: border-box; }
 </style>
 </head>
 <body>
-<h2 style="color:#3b82f6">PATNOS DAMA V5.4</h2>
-<div id="grid" class="board"></div>
-<p id="st" style="color:gold; font-weight:bold; margin-top:20px;">SIRA: ALTIN</p>
 
 </body>
 </html>
