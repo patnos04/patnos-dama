@@ -6,13 +6,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Patnos Dama</title>
 <script src=""></script>
-<link rel="stylesheet" href="[suspicious link removed]">
+<link rel="stylesheet" href="[şüpheli bağlantı kaldırıldı]">
 <script src=""></script>
 <script src=""></script>
 <script src=""></script>
 </head>
 <body style="background-color: #09090b; margin: 0; color: white;">
 <div id="root"></div>
-
+<script type="text/babel">
+const App = () => {
+return (
+<div className="min-h-screen flex flex-col items-center justify-center p-4 bg-zinc-950">
+<h1 className="text-5xl md:text-7xl font-black text-white tracking-tighter italic mb-10">
+<span className="text-blue-500">PATNOS</span> DAMA
+</h1>
+<div className="w-full max-w-[500px] aspect-square bg-zinc-900 rounded-[2.5rem] border-[8px] border-zinc-800 shadow-2xl relative overflow-hidden">
+<div className="grid grid-cols-8 grid-rows-8 w-full h-full">
+{Array.from({ length: 64 }).map((_, i) => (
+<div key={i} className={w-full h-full ${(Math.floor(i/8) + (i%8)) % 2 !== 0 ? &#39;bg-zinc-800&#39; : &#39;bg-zinc-900&#39;} border border-white/5}></div>
+))}
+</div>
+<div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+<p className="text-blue-400 font-black tracking-widest uppercase animate-pulse text-center px-4">Sistem Bağlantısı Kuruldu</p>
+</div>
+</div>
+</div>
+);
+};
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+</script>
 </body>
 </html>
