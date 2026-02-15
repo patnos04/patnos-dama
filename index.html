@@ -4,50 +4,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Patnos Dama</title>
+<title>Patnos Dama V5.4</title>
+<script src=""></script>
+<link rel="stylesheet" href="[şüpheli bağlantı kaldırıldı]">
 <style>
-body { background: #09090b; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; overflow: hidden; }
-h1 { font-style: italic; color: #3b82f6; margin-bottom: 20px; font-size: clamp(24px, 8vw, 40px); text-shadow: 0 0 15px rgba(59, 130, 246, 0.5); }
-.board-container { background: #27272a; padding: 12px; border-radius: 20px; border: 4px solid #3f3f46; box-shadow: 0 10px 40px rgba(0,0,0,0.7); }
-.board { display: grid; grid-template-columns: repeat(8, clamp(35px, 10vw, 60px)); grid-template-rows: repeat(8, clamp(35px, 10vw, 60px)); background: #18181b; border: 2px solid #3f3f46; }
-.square { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid rgba(255,255,255,0.05); box-sizing: border-box; }
-.dark { background-color: rgba(63, 63, 70, 0.6) !important; }
-.piece { width: 80%; height: 80%; border-radius: 50%; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 0 rgba(0,0,0,0.5); pointer-events: none; }
-.white { background: #f4f4f5; border: 1px solid #d4d4d8; }
-.black { background: #3b82f6; border: 1px solid #2563eb; }
-.selected { outline: 4px solid #fbbf24; transform: scale(1.15); z-index: 10; box-shadow: 0 0 25px #fbbf24; }
-#status { margin-top: 25px; font-weight: 900; letter-spacing: 3px; font-size: 18px; text-transform: uppercase; }
+@import url('');
+body { background: #050505; color: white; font-family: 'Inter', sans-serif; margin: 0; padding: 20px; }
+.orbitron { font-family: 'Orbitron', sans-serif; }
+.board-container { background: #1a1a1a; padding: 15px; border-radius: 2rem; border: 8px solid #27272a; box-shadow: 0 25px 50px rgba(0,0,0,0.8); }
+.board { display: grid; grid-template-columns: repeat(8, 1fr); width: 100%; aspect-ratio: 1/1; border: 4px solid #000; }
+.square { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.sq-light { background: #d1d5db; }
+.sq-dark { background: #1f2937; }
+.piece { width: 85%; height: 85%; border-radius: 50%; transition: 0.3s; }
+.piece-gold { background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b); box-shadow: 0 6px 0 #8b6508; border: 2px solid #daa520; }
+.piece-blue { background: radial-gradient(circle at 30% 30%, #3b82f6, #1e3a8a); box-shadow: 0 6px 0 #172554; border: 2px solid #2563eb; }
+.selected { transform: scale(1.1) translateY(-10px); outline: 4px solid #3b82f6; z-index: 50; box-shadow: 0 0 20px #3b82f6; }
+.glass-panel { background: rgba(24, 24, 27, 0.9); border: 1px solid #3f3f46; border-radius: 1.5rem; padding: 20px; }
 </style>
 </head>
 <body>
-<h1>PATNOS DAMA</h1>
-<div class="board-container"><div id="board" class="board"></div></div>
-<div id="status">SIRA: BEYAZ</div>
-
-<script>
-const bEl = document.getElementById('board');
-const sEl = document.getElementById('status');
-let board = Array(8).fill(null).map(() => Array(8).fill(null));
-let turn = 'white';
-let sel = null;
-
-function init() {
-// Patnos/Türk Daması Dizilimi (2-3 ve 6-7. sıralar)
-for(let r=1; r<3; r++) for(let c=0; c<8; c++) board[r][c] = 'black';
-for(let r=5; r<7; r++) for(let c=0; c<8; c++) board[r][c] = 'white';
-draw();
-}
-
-function draw() {
-bEl.innerHTML = '';
-for(let r=0; r<8; r++) {
-for(let c=0; c<8; c++) {
-const sq = document.createElement('div');
-sq.className = 'square' + ((r+c)%2 !== 0 ? ' dark' : '');
-
-}
-init();
-</script>
+<div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center mb-8 gap-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-blue-500">
+<img src="" alt="Logo" class="w-10 h-10">
+</div>
+<div>
+<span class="text-[10px] font-bold text-zinc-500 uppercase">İZMİR PATNOSLULAR DERNEĞİ</span>
+<h1 class="orbitron text-3xl font-black italic text-blue-500">PATNOS DAMA</h1>
+</div>
+</div>
+<div class="glass-panel py-2 px-6">
+<span class="orbitron font-bold text-zinc-400">VERSION <span class="text-blue-500">5.4</span></span>
+</div>
+</div>
 
 </body>
 </html>
