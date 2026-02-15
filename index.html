@@ -1,32 +1,44 @@
+Haklısın, sistem bazen uzun kod bloklarını "güvenlik" veya "biçimlendirme" nedeniyle gizleyebiliyor. Bu durum gerçekten çok can sıkıcı bir hal aldı ama pes etmiyoruz; o taşları o tahtaya dizeceğiz!
+
+Kodu şimdi hiçbir kutu (code block) içine almadan, direkt düz metin olarak aşağıya bırakıyorum. Lütfen GitHub'daki index.html dosyasının içindekileri TAMAMEN SİL ve aşağıdaki metni en başından en sonuna kadar kopyalayıp yapıştır.
+
 <!DOCTYPE html>
 
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Patnos Dama</title>
 <style>
 body { background: #09090b; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
-.board { display: grid; grid-template-columns: repeat(8, 50px); grid-template-rows: repeat(8, 50px); background: #18181b; border: 5px solid #3f3f46; }
-.square { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid #27272a; }
-.dark { background: #27272a !important; }
-.piece { width: 40px; height: 40px; border-radius: 50%; transition: 0.2s; }
-.white { background: #f4f4f5; border: 2px solid #d4d4d8; }
-.black { background: #3b82f6; border: 2px solid #2563eb; }
-.selected { border: 3px solid #fbbf24; transform: scale(1.1); }
+h1 { font-style: italic; color: #3b82f6; margin-bottom: 20px; font-size: 40px; text-shadow: 0 0 15px rgba(59, 130, 246, 0.5); }
+.board-container { background: #27272a; padding: 12px; border-radius: 20px; border: 4px solid #3f3f46; box-shadow: 0 10px 40px rgba(0,0,0,0.7); }
+.board { display: grid; grid-template-columns: repeat(8, 45px); grid-template-rows: repeat(8, 45px); background: #18181b; border: 2px solid #3f3f46; }
+@media (min-width: 600px) { .board { grid-template-columns: repeat(8, 60px); grid-template-rows: repeat(8, 60px); } }
+.square { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid #27272a; box-sizing: border-box; }
+.dark { background-color: #27272a !important; }
+.piece { width: 80%; height: 80%; border-radius: 50%; transition: 0.2s; box-shadow: 0 4px 0 rgba(0,0,0,0.5); }
+.white { background: #f4f4f5; border: 1px solid #d4d4d8; }
+.black { background: #3b82f6; border: 1px solid #2563eb; }
+.selected { outline: 3px solid #fbbf24; transform: scale(1.1); z-index: 5; box-shadow: 0 0 15px #fbbf24; }
+#status { margin-top: 25px; font-weight: bold; letter-spacing: 3px; font-size: 18px; text-transform: uppercase; color: #71717a; }
 </style>
 </head>
 <body>
-<h1 style="color:#3b82f6; font-style:italic;">PATNOS DAMA</h1>
+<h1>PATNOS DAMA</h1>
+<div class="board-container">
 <div id="board" class="board"></div>
-<h2 id="status" style="margin-top:20px;">SIRA: BEYAZ</h2>
+</div>
+<div id="status">SIRA: BEYAZ</div>
 <script>
 const bEl = document.getElementById('board');
 const sEl = document.getElementById('status');
-let b = Array(8).fill(null).map(() => Array(8).fill(null));
-let t = 'white'; let s = null;
+let board = Array(8).fill(null).map(() => Array(8).fill(null));
+let turn = 'white';
+let sel = null;
 function init() {
-for(let r=0; r<2; r++) for(let c=0; c<8; c++) b[r][c] = 'black';
-for(let r=6; r<8; r++) for(let c=0; c<8; c++) b[r][c] = 'white';
+for(let r=0; r<2; r++) for(let c=0; c<8; c++) board[r][c] = 'black';
+for(let r=6; r<8; r++) for(let c=0; c<8; c++) board[r][c] = 'white';
 draw();
 }
 function draw() {
@@ -34,23 +46,28 @@ bEl.innerHTML = '';
 for(let r=0; r<8; r++) {
 for(let c=0; c<8; c++) {
 const sq = document.createElement('div');
-sq.className = square ${(r+c)%2!==0?&#39;dark&#39;:&#39;&#39;};
-if(b[r][c]) {
+sq.className = 'square' + ((r+c)%2 !== 0 ? ' dark' : '');
+if(board[r][c]) {
 const p = document.createElement('div');
-p.className = piece ${b[r][c]} ${s?.r===r&amp;&amp;s?.c===c?&#39;selected&#39;:&#39;&#39;};
+p.className = 'piece ' + board[r][c] + (sel?.r===r && sel?.c===c ? ' selected' : '');
 sq.appendChild(p);
 }
 sq.onclick = () => {
-if(b[r][c] === t) { s = {r,c}; }
-else if(s) {
-b[r][c] = b[s.r][s.c]; b[s.r][s.c] = null;
-s = null; t = t==='white'?'black':'white';
+if(board[r][c] === turn) {
+sel = {r, c};
+} else if(sel) {
+board[r][c] = board[sel.r][sel.c];
+board[sel.r][sel.c] = null;
+sel = null;
+turn = turn === 'white' ? 'black' : 'white';
 }
 draw();
 };
 bEl.appendChild(sq);
-}}
-sEl.innerText = "SIRA: " + (t==='white'?'BEYAZ':'MAVİ');
+}
+}
+sEl.innerText = 'SIRA: ' + (turn === 'white' ? 'BEYAZ' : 'MAVİ');
+sEl.style.color = turn === 'white' ? '#fff' : '#3b82f6';
 }
 init();
 </script>
