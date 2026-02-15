@@ -5,20 +5,20 @@
 <meta charset="UTF-8">
 <title>Patnos Dama Pro</title>
 <style>
-body { background: #000; color: #fff; font-family: sans-serif; text-align: center; }
-#board {
-display: grid; grid-template-columns: repeat(8, 1fr);
-width: 360px; height: 360px; border: 5px solid #333; margin: 20px auto;
+/* Siyah ekranı engellemek için arka planı gri yapalım /
+body { background: #222; color: #fff; font-family: sans-serif; text-align: center; padding: 20px; margin: 0; }
+.board {
+display: grid;
+grid-template-columns: repeat(8, 1fr);
+width: 320px; height: 320px;
+border: 10px solid #111;
+margin: 20px auto;
+background: #000;
 }
-.cell { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-.white { background: #444; }
-.black { background: #222; }
-.p { width: 35px; height: 35px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.3); }
-.p-gold { background: linear-gradient(#ffd700, #b8860b); box-shadow: 0 3px #8b6508; }
-.p-blue { background: linear-gradient(#3b82f6, #1e3a8a); box-shadow: 0 3px #172554; }
-.sel { outline: 3px solid white; transform: scale(1.1); }
-#info { background: #111; padding: 15px; border-radius: 10px; display: inline-block; margin-top: 10px; border: 1px solid #333; }
-</style>
+/ Kareler */
+.w { background: #555; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
+.b { background: #333; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
+
 </head>
 <body>
 
