@@ -5,18 +5,20 @@
 <meta charset="UTF-8">
 <title>Patnos Dama V5.4</title>
 <style>
-body { background: #000; color: #3b82f6; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-.board { display: grid; grid-template-columns: repeat(8, 45px); width: 360px; height: 360px; border: 5px solid #333; }
-.sq { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; }
-.sq-l { background: #222; } .sq-d { background: #111; }
-.p { width: 30px; height: 30px; border-radius: 50%; }
-.p-g { background: gold; } .p-b { background: #3b82f6; }
+body { background: #050505; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
+.board { display: grid; grid-template-columns: repeat(8, 45px); width: 360px; height: 360px; border: 10px solid #222; background: #111; }
+.sq { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.sq-l { background: #333; } .sq-d { background: #1a1a1a; }
+.p { width: 34px; height: 34px; border-radius: 50%; pointer-events: none; }
+.p-g { background: gold; box-shadow: 0 4px #8b6508; }
+.p-b { background: #3b82f6; box-shadow: 0 4px #1e3a8a; }
+.sel { outline: 3px solid white; box-shadow: 0 0 15px white; }
 </style>
 </head>
 <body>
-<h1>SİSTEM SIFIRLANDI</h1>
-<div class="board" id="b"></div>
-<p>Lütfen bekleyin...</p>
+<h2 style="color:#3b82f6">PATNOS DAMA V5.4</h2>
+<div id="grid" class="board"></div>
+<p id="st" style="color:gold; font-weight:bold; margin-top:20px;">SIRA: ALTIN</p>
 
 </body>
 </html>
