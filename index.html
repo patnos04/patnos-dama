@@ -1,54 +1,64 @@
 <!DOCTYPE html>
 
-<html lang="tr">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Patnos Dama V5.4 - Final</title>
-<script src=""></script>
+<title>Patnos Dama V5.4</title>
 <style>
-body { background: #050505; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 10px; }
-.board-container { background: #1a1a1a; padding: 15px; border-radius: 2rem; border: 4px solid #27272a; width: 100%; max-width: 420px; box-shadow: 0 0 60px rgba(0,0,0,1); }
-.board { display: grid; grid-template-columns: repeat(8, 1fr); aspect-ratio: 1/1; background: #000; border: 2px solid #000; border-radius: 8px; overflow: hidden; }
-.sq { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
+body { background: #050505; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
+.board { display: grid; grid-template-columns: repeat(8, 1fr); width: 360px; height: 360px; border: 8px solid #27272a; background: #000; }
+.sq { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
 .sq-l { background: #2a2a2a; } .sq-d { background: #121212; }
-.p { width: 85%; height: 85%; border-radius: 50%; transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; }
-.p-g { background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b); box-shadow: 0 5px 0 #8b6508, 0 8px 15px rgba(0,0,0,0.5); border: 1px solid #daa520; }
-.p-b { background: radial-gradient(circle at 30% 30%, #3b82f6, #1e3a8a); box-shadow: 0 5px 0 #172554, 0 8px 15px rgba(0,0,0,0.5); border: 1px solid #2563eb; }
-.sel { transform: scale(1.15) translateY(-5px); outline: 3px solid #fff; z-index: 20; box-shadow: 0 0 25px #fff; }
-.panel { background: rgba(20, 20, 20, 0.95); border: 1px solid #333; border-radius: 1.5rem; padding: 20px; width: 100%; max-width: 420px; margin-top: 20px; }
+.p { width: 35px; height: 35px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); }
+.p-g { background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b); box-shadow: 0 4px 0 #8b6508; }
+.p-b { background: radial-gradient(circle at 30% 30%, #3b82f6, #1e3a8a); box-shadow: 0 4px 0 #172554; }
+.sel { outline: 3px solid #fff; transform: scale(1.1); }
 </style>
 </head>
 <body>
-
-<div class="text-center mb-4">
-<p class="text-[9px] text-zinc-600 font-bold tracking-[4px] uppercase mb-1">İzmir Patnoslular Derneği Yapımıdır</p>
-<h1 class="text-3xl font-black italic text-blue-500 tracking-tighter uppercase">Patnos Dama <span class="text-zinc-700 text-lg ml-1">V5.4</span></h1>
-</div>
-
-<div class="board-container"><div id="board" class="board"></div></div>
-
-<div class="panel">
-<div class="flex justify-between items-center mb-4 text-[10px] font-bold text-zinc-500 tracking-widest">
-<span>HAMLE SIRASI</span>
-<span class="text-blue-500 animate-pulse">CANLI ●</span>
-</div>
-<div id="turn-card" class="bg-zinc-900/50 p-4 rounded-2xl border-l-4 border-yellow-600 flex items-center gap-4 transition-all duration-500">
-<div id="turn-icon" class="w-10 h-10 bg-yellow-600 rounded-xl flex items-center justify-center text-xl shadow-lg shadow-yellow-900/20">👤</div>
-<div>
-<div id="turn-txt" class="font-black text-xl text-white">ALTIN</div>
-<p class="text-[9px] text-zinc-500 font-bold uppercase tracking-tight">Taşını seç ve hedefe tıkla!</p>
-</div>
-</div>
-</div>
-
+<h1 style="color: #3b82f6; font-style: italic; margin-bottom: 15px;">PATNOS DAMA V5.4</h1>
+<div id="board" class="board"></div>
+<p id="turn-txt" style="margin-top: 15px; font-weight: bold; color: gold;">SIRA: ALTIN</p>
 <script>
 const bEl = document.getElementById('board');
 const tTxt = document.getElementById('turn-txt');
-const tIcon = document.getElementById('turn-icon');
-const tCard = document.getElementById('turn-card');
-
+let board = Array(8).fill(null).map(() => Array(8).fill(null));
+let turn = 'g'; let sel = null;
+function init() {
+for(let r=1; r<3; r++) for(let c=0; c<8; c++) board[r][c] = 'b';
+for(let r=5; r<7; r++) for(let c=0; c<8; c++) board[r][c] = 'g';
+draw();
+}
+function draw() {
+bEl.innerHTML = '';
+for(let r=0; r<8; r++) {
+for(let c=0; c<8; c++) {
+const s = document.createElement('div');
+s.className = sq ${(r+c)%2==0?&#39;sq-l&#39;:&#39;sq-d&#39;};
+if(board[r][c]) {
+const p = document.createElement('div');
+p.className = p ${board[r][c]==&#39;g&#39;?&#39;p-g&#39;:&#39;p-b&#39;} ${sel?.r==r &amp;&amp; sel?.c==c?&#39;sel&#39;:&#39;&#39;};
+s.appendChild(p);
+}
+s.onclick = () => {
+if(board[r][c] === turn) { sel = {r,c}; draw(); }
+else if(sel && !board[r][c]) {
+if(Math.abs(r-sel.r) + Math.abs(c-sel.c) === 1) {
+board[r][c] = board[sel.r][sel.c];
+board[sel.r][sel.c] = null;
+turn = turn=='g'?'b':'g';
+sel = null;
+tTxt.innerText = "SIRA: " + (turn=='g'?'ALTIN':'MAVİ');
+tTxt.style.color = turn=='g'?'gold':'#3b82f6';
+draw();
+}
+}
+};
+bEl.appendChild(s);
+}
+}
+}
+init();
 </script>
-
 </body>
 </html>
