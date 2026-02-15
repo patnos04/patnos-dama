@@ -6,77 +6,74 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Patnos Dama V5.4</title>
 <script src=""></script>
-<link rel="stylesheet" href="[şüpheli bağlantı kaldırıldı]">
 <style>
-@import url('');
-body { background: #050505; color: white; font-family: 'Inter', sans-serif; margin: 0; padding: 10px; overflow-x: hidden; }
-.orbitron { font-family: 'Orbitron', sans-serif; }
-.board-container { background: #1a1a1a; padding: 10px; border-radius: 1.5rem; border: 4px solid #27272a; max-width: 500px; width: 100%; margin: auto; }
+body { background: #050505; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 10px; }
+.board-container { background: #1a1a1a; padding: 10px; border-radius: 1rem; border: 4px solid #27272a; width: 100%; max-width: 400px; }
 .board { display: grid; grid-template-columns: repeat(8, 1fr); aspect-ratio: 1/1; border: 2px solid #000; }
-.square { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-.sq-light { background: #333; }
-.sq-dark { background: #1a1a1a; }
-.piece { width: 80%; height: 80%; border-radius: 50%; transition: 0.3s; position: relative; }
-.piece-gold { background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b); box-shadow: 0 4px 0 #8b6508; border: 1px solid #daa520; }
-.piece-blue { background: radial-gradient(circle at 30% 30%, #3b82f6, #1e3a8a); box-shadow: 0 4px 0 #172554; border: 1px solid #2563eb; }
-.selected { transform: scale(1.1) translateY(-5px); outline: 3px solid #3b82f6; z-index: 50; }
-.glass-panel { background: rgba(24, 24, 27, 0.9); border: 1px solid #3f3f46; border-radius: 1rem; padding: 15px; margin-top: 10px; }
+.sq { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 0.1px solid #222; }
+.sq-l { background: #333; } .sq-d { background: #1a1a1a; }
+.p { width: 85%; height: 85%; border-radius: 50%; transition: 0.2s; position: relative; }
+.p-g { background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b); box-shadow: 0 4px 0 #8b6508; border: 1px solid #daa520; }
+.p-b { background: radial-gradient(circle at 30% 30%, #3b82f6, #1e3a8a); box-shadow: 0 4px 0 #172554; border: 1px solid #2563eb; }
+.sel { transform: scale(1.1); outline: 3px solid #3b82f6; z-index: 10; }
+.panel { background: rgba(24, 24, 27, 0.9); border: 1px solid #3f3f46; border-radius: 1rem; padding: 15px; width: 100%; max-width: 400px; margin-top: 10px; }
 </style>
 </head>
-<body class="flex flex-col items-center">
-<div class="w-full max-w-4xl flex flex-col items-center gap-4 mb-4">
-<div class="flex items-center gap-3">
-<img src="" class="w-10 h-10">
-<div><p class="text-[8px] font-bold text-zinc-500 uppercase tracking-widest">İZMİR PATNOSLULAR DERNEĞİ</p>
-<h1 class="orbitron text-2xl font-black italic text-blue-500">PATNOS DAMA</h1></div>
+<body>
+<div style="text-align: center; margin-bottom: 10px;">
+<p style="font-size: 8px; color: #555; letter-spacing: 2px;">İZMİR PATNOSLULAR DERNEĞİ</p>
+<h1 style="color: #3b82f6; font-weight: 900; font-style: italic;">PATNOS DAMA <span style="color: #555; font-size: 12px;">V5.4</span></h1>
 </div>
-<div class="glass-panel py-1 px-4 text-[10px] orbitron font-bold text-zinc-400">VERSION <span class="text-blue-500">5.4</span></div>
+
+<div class="board-container"><div id="board" class="board"></div></div>
+
+<div class="panel">
+<div style="display: flex; justify-content: space-between; font-size: 10px; color: #555; margin-bottom: 10px;"><span>SIRA</span><span>● 1:41</span></div>
+<div style="background: #222; padding: 10px; border-radius: 10px; border-left: 4px solid #3b82f6;">
+<div id="turn-txt" style="font-weight: 900; font-size: 18px;">ALTIN</div>
+<p style="font-size: 9px; color: #888;">Patnos Kuralları: Sadece ileri ve yanlara!</p>
 </div>
-<div class="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-12 gap-4">
-<div class="lg:col-span-8 flex justify-center"><div class="board-container"><div id="board" class="board"></div></div></div>
-<div class="lg:col-span-4 flex flex-col gap-3">
-<div class="glass-panel"><div class="flex justify-between items-center mb-2"><span class="text-[10px] font-bold text-zinc-500 uppercase">SIRA</span><span class="text-blue-400 font-mono text-xs">1:41</span></div>
-<div class="flex items-center gap-3 p-3 bg-zinc-800 rounded-lg border border-blue-500/30">
-<div id="turn-icon" class="w-10 h-10 bg-blue-600 rounded flex items-center justify-center text-lg"><i class="fas fa-user"></i></div>
-<div><div id="turn-text" class="text-lg font-black orbitron uppercase text-white">ALTIN</div><p class="text-[8px] text-zinc-400 uppercase mt-1">Taş yeme zorunludur!</p></div>
-</div></div>
-<div class="glass-panel"><span class="text-[10px] font-bold text-zinc-500 mb-2 block uppercase tracking-widest">Zorluk</span>
-<div class="grid grid-cols-3 gap-2 text-[9px] font-black uppercase">
-<button class="bg-zinc-800 py-2 rounded opacity-50">ACEMİ</button><button class="bg-white text-black py-2 rounded">NORMAL</button><button class="bg-zinc-800 py-2 rounded opacity-50">UZMAN</button>
-</div></div></div></div>
+<div style="margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px;">
+<button style="background: #333; font-size: 10px; padding: 5px; border-radius: 5px; opacity: 0.5;">ACEMİ</button>
+<button style="background: #fff; color: #000; font-size: 10px; padding: 5px; border-radius: 5px; font-weight: bold;">NORMAL</button>
+<button style="background: #333; font-size: 10px; padding: 5px; border-radius: 5px; opacity: 0.5;">UZMAN</button>
+</div>
+</div>
+
 <script>
 const bEl = document.getElementById('board');
 let board = Array(8).fill(null).map(() => Array(8).fill(null));
-let turn = 'gold'; let sel = null;
+let turn = 'g'; let sel = null;
+
 function init() {
-for(let r=1; r<3; r++) for(let c=0; c<8; c++) board[r][c] = 'blue';
-for(let r=5; r<7; r++) for(let c=0; c<8; c++) board[r][c] = 'gold';
-render();
+for(let r=1; r<3; r++) for(let c=0; c<8; c++) board[r][c] = 'b';
+for(let r=5; r<7; r++) for(let c=0; c<8; c++) board[r][c] = 'g';
+draw();
 }
-function render() {
+
+function draw() {
 bEl.innerHTML = '';
 for(let r=0; r<8; r++) {
 for(let c=0; c<8; c++) {
-const sq = document.createElement('div');
-sq.className = square ${(r+c)%2===0 ? &#39;sq-light&#39; : &#39;sq-dark&#39;};
+const s = document.createElement('div');
+s.className = sq ${(r+c)%2==0?&#39;sq-l&#39;:&#39;sq-d&#39;};
 if(board[r][c]) {
 const p = document.createElement('div');
-p.className = piece ${board[r][c]===&#39;gold&#39;?&#39;piece-gold&#39;:&#39;piece-blue&#39;} ${sel?.r===r&amp;&amp;sel?.c===c?&#39;selected&#39;:&#39;&#39;};
-sq.appendChild(p);
+p.className = p ${board[r][c]==&#39;g&#39;?&#39;p-g&#39;:&#39;p-b&#39;} ${sel?.r==r &amp;&amp; sel?.c==c?&#39;sel&#39;:&#39;&#39;};
+s.appendChild(p);
 }
-sq.onclick = () => {
-if(board[r][c] === turn) { sel = {r,c}; render(); }
+s.onclick = () => {
+if(board[r][c] === turn) { sel = {r,c}; draw(); }
 else if(sel && !board[r][c]) {
-const rD = Math.abs(r-sel.r); const cD = Math.abs(c-sel.c);
-if((rD + cD) === 1) {
+if(Math.abs(r-sel.r) + Math.abs(c-sel.c) === 1) {
 board[r][c] = board[sel.r][sel.c]; board[sel.r][sel.c] = null;
-turn = turn === 'gold' ? 'blue' : 'gold'; sel = null;
-document.getElementById('turn-text').innerText = turn==='gold'?'ALTIN':'MAVİ';
-render();
+turn = turn=='g'?'b':'g'; sel = null;
+document.getElementById('turn-txt').innerText = turn=='g'?'ALTIN':'MAVİ';
+draw();
 }
 }
 };
-bEl.appendChild(sq);
+bEl.appendChild(s);
 }
 }
 }
