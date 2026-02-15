@@ -6,26 +6,19 @@
 <title>Patnos Dama V5.4</title>
 <style>
 body { background: #050505; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
-.board { display: grid; grid-template-columns: repeat(8, 45px); width: 360px; height: 360px; border: 8px solid #27272a; background: #000; }
-.sq { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; }
+.board { display: grid; grid-template-columns: repeat(8, 45px); width: 360px; height: 360px; border: 8px solid #27272a; background: #000; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
+.sq { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
 .sq-l { background: #2a2a2a; } .sq-d { background: #121212; }
-.p { width: 35px; height: 35px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); }
+.p { width: 35px; height: 35px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); transition: 0.2s; }
 .p-g { background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b); box-shadow: 0 4px 0 #8b6508; }
 .p-b { background: radial-gradient(circle at 30% 30%, #3b82f6, #1e3a8a); box-shadow: 0 4px 0 #172554; }
+.sel { outline: 3px solid #fff; transform: scale(1.1); box-shadow: 0 0 15px #fff; }
 </style>
 </head>
 <body>
-<h1 style="color: #3b82f6; font-style: italic; margin-bottom: 15px;">PATNOS DAMA V5.4</h1>
-<div class="board">
-<div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div>
-<div class="sq sq-d"><div class="p p-b"></div></div><div class="sq sq-l"><div class="p p-b"></div></div><div class="sq sq-d"><div class="p p-b"></div></div><div class="sq sq-l"><div class="p p-b"></div></div><div class="sq sq-d"><div class="p p-b"></div></div><div class="sq sq-l"><div class="p p-b"></div></div><div class="sq sq-d"><div class="p p-b"></div></div><div class="sq sq-l"><div class="p p-b"></div></div>
-<div class="sq sq-l"><div class="p p-b"></div></div><div class="sq sq-d"><div class="p p-b"></div></div><div class="sq sq-l"><div class="p p-b"></div></div><div class="sq sq-d"><div class="p p-b"></div></div><div class="sq sq-l"><div class="p p-b"></div></div><div class="sq sq-d"><div class="p p-b"></div></div><div class="sq sq-l"><div class="p p-b"></div></div><div class="sq sq-d"><div class="p p-b"></div></div>
-<div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div>
-<div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div>
-<div class="sq sq-d"><div class="p p-g"></div></div><div class="sq sq-l"><div class="p p-g"></div></div><div class="sq sq-d"><div class="p p-g"></div></div><div class="sq sq-l"><div class="p p-g"></div></div><div class="sq sq-d"><div class="p p-g"></div></div><div class="sq sq-l"><div class="p p-g"></div></div><div class="sq sq-d"><div class="p p-g"></div></div><div class="sq sq-l"><div class="p p-g"></div></div>
-<div class="sq sq-l"><div class="p p-g"></div></div><div class="sq sq-d"><div class="p p-g"></div></div><div class="sq sq-l"><div class="p p-g"></div></div><div class="sq sq-d"><div class="p p-g"></div></div><div class="sq sq-l"><div class="p p-g"></div></div><div class="sq sq-d"><div class="p p-g"></div></div><div class="sq sq-l"><div class="p p-g"></div></div><div class="sq sq-d"><div class="p p-g"></div></div>
-<div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div>
-</div>
-<p style="margin-top: 15px; font-weight: bold; color: gold;">SIRA: ALTIN</p>
+<h1 style="color: #3b82f6; font-style: italic; margin-bottom: 15px; letter-spacing: 2px;">PATNOS DAMA V5.4</h1>
+<div id="game-board" class="board"></div>
+<p id="turn-display" style="margin-top: 15px; font-weight: bold; color: gold; font-size: 1.2rem;">SIRA: ALTIN</p>
+
 </body>
 </html>
