@@ -6,59 +6,26 @@
 <title>Patnos Dama V5.4</title>
 <style>
 body { background: #050505; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
-.board { display: grid; grid-template-columns: repeat(8, 1fr); width: 360px; height: 360px; border: 8px solid #27272a; background: #000; }
-.sq { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.board { display: grid; grid-template-columns: repeat(8, 45px); width: 360px; height: 360px; border: 8px solid #27272a; background: #000; }
+.sq { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; }
 .sq-l { background: #2a2a2a; } .sq-d { background: #121212; }
 .p { width: 35px; height: 35px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); }
 .p-g { background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b); box-shadow: 0 4px 0 #8b6508; }
 .p-b { background: radial-gradient(circle at 30% 30%, #3b82f6, #1e3a8a); box-shadow: 0 4px 0 #172554; }
-.sel { outline: 3px solid #fff; transform: scale(1.1); }
 </style>
 </head>
 <body>
 <h1 style="color: #3b82f6; font-style: italic; margin-bottom: 15px;">PATNOS DAMA V5.4</h1>
-<div id="board" class="board"></div>
-<p id="turn-txt" style="margin-top: 15px; font-weight: bold; color: gold;">SIRA: ALTIN</p>
-<script>
-const bEl = document.getElementById('board');
-const tTxt = document.getElementById('turn-txt');
-let board = Array(8).fill(null).map(() => Array(8).fill(null));
-let turn = 'g'; let sel = null;
-function init() {
-for(let r=1; r<3; r++) for(let c=0; c<8; c++) board[r][c] = 'b';
-for(let r=5; r<7; r++) for(let c=0; c<8; c++) board[r][c] = 'g';
-draw();
-}
-function draw() {
-bEl.innerHTML = '';
-for(let r=0; r<8; r++) {
-for(let c=0; c<8; c++) {
-const s = document.createElement('div');
-s.className = sq ${(r+c)%2==0?&#39;sq-l&#39;:&#39;sq-d&#39;};
-if(board[r][c]) {
-const p = document.createElement('div');
-p.className = p ${board[r][c]==&#39;g&#39;?&#39;p-g&#39;:&#39;p-b&#39;} ${sel?.r==r &amp;&amp; sel?.c==c?&#39;sel&#39;:&#39;&#39;};
-s.appendChild(p);
-}
-s.onclick = () => {
-if(board[r][c] === turn) { sel = {r,c}; draw(); }
-else if(sel && !board[r][c]) {
-if(Math.abs(r-sel.r) + Math.abs(c-sel.c) === 1) {
-board[r][c] = board[sel.r][sel.c];
-board[sel.r][sel.c] = null;
-turn = turn=='g'?'b':'g';
-sel = null;
-tTxt.innerText = "SIRA: " + (turn=='g'?'ALTIN':'MAVİ');
-tTxt.style.color = turn=='g'?'gold':'#3b82f6';
-draw();
-}
-}
-};
-bEl.appendChild(s);
-}
-}
-}
-init();
-</script>
+<div class="board">
+<div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div>
+<div class="sq sq-d"><div class="p p-b"></div></div><div class="sq sq-l"><div class="p p-b"></div></div><div class="sq sq-d"><div class="p p-b"></div></div><div class="sq sq-l"><div class="p p-b"></div></div><div class="sq sq-d"><div class="p p-b"></div></div><div class="sq sq-l"><div class="p p-b"></div></div><div class="sq sq-d"><div class="p p-b"></div></div><div class="sq sq-l"><div class="p p-b"></div></div>
+<div class="sq sq-l"><div class="p p-b"></div></div><div class="sq sq-d"><div class="p p-b"></div></div><div class="sq sq-l"><div class="p p-b"></div></div><div class="sq sq-d"><div class="p p-b"></div></div><div class="sq sq-l"><div class="p p-b"></div></div><div class="sq sq-d"><div class="p p-b"></div></div><div class="sq sq-l"><div class="p p-b"></div></div><div class="sq sq-d"><div class="p p-b"></div></div>
+<div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div>
+<div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div>
+<div class="sq sq-d"><div class="p p-g"></div></div><div class="sq sq-l"><div class="p p-g"></div></div><div class="sq sq-d"><div class="p p-g"></div></div><div class="sq sq-l"><div class="p p-g"></div></div><div class="sq sq-d"><div class="p p-g"></div></div><div class="sq sq-l"><div class="p p-g"></div></div><div class="sq sq-d"><div class="p p-g"></div></div><div class="sq sq-l"><div class="p p-g"></div></div>
+<div class="sq sq-l"><div class="p p-g"></div></div><div class="sq sq-d"><div class="p p-g"></div></div><div class="sq sq-l"><div class="p p-g"></div></div><div class="sq sq-d"><div class="p p-g"></div></div><div class="sq sq-l"><div class="p p-g"></div></div><div class="sq sq-d"><div class="p p-g"></div></div><div class="sq sq-l"><div class="p p-g"></div></div><div class="sq sq-d"><div class="p p-g"></div></div>
+<div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div><div class="sq sq-d"></div><div class="sq sq-l"></div>
+</div>
+<p style="margin-top: 15px; font-weight: bold; color: gold;">SIRA: ALTIN</p>
 </body>
 </html>
